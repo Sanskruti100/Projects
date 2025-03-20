@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Feedback System</title>
+    <style>
+        body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('image.png') center/cover no-repeat;
+    opacity: 0.5; /* Adjust opacity */
+    z-index: -1;
+}
+.main-box,
+.container,
+.upper {
+    background: transparent;
+    box-shadow: none; /* Remove any shadows if unnecessary */
+}
+
+/* Optional: Add slight text shadow for better readability */
+h1, h2, label {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .name {
+            font-size: 60px;
+            text-align: left;
+            background-color: #254336;
+            color: bisque;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 200px;
+            box-sizing: border-box;
+        }
+
+        .name img {
+            height:100%;
+            margin-right: 10px;
+            
+        }
+        .text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.digital {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.dastak {
+    font-family: 'Mukta', sans-serif;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+        .midname {
+            position: absolute;
+            top: 200px;
+            left: 0;
+            width: 100%;
+            background-color: #B7B597;
+            padding: 5px 0;
+            text-align: center;
+            z-index: 1000;
+            box-sizing: border-box;
+            font-size:20px;
+        }
+
+        .box h1 {
+            text-align: center;
+            color: #000000;
+            padding-top: 230px;
+        }
+
+        /* Main Box */
+        .main-box {
+            width: calc(100% - 40px);
+            height: 600px;
+          
+            border-radius: 10px;
+            margin: 50px auto;
+            box-shadow: 0px 0px 10px gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* Image Slider */
+        .slider-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-box img {
+            width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    left: 0;
+        }
+
+        .slider-box img.active {
+            opacity: 1;
+        }
+
+        /* Navigation Buttons */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* Feedback Form Box */
+       .upper{
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+          
+        }
+        .container {
+            
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0px 0px 10px gray;
+            background-color: #cbe7d2;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        select, textarea, input {
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background: blue;
+            
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #capturedImage {
+            margin-top: 15px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="name">
+        <img src="./logo3.png" alt="Logo">
+        <div class="text-container">
+            <span>
+                <span class="digital">DIGITAL</span> 
+                <span class="dastak">दस्तक</span>
+            </span>
+            <div class="subtitle">Knock from Citizens!</div>
+        </div>
+    </div>
+    <div class="midname">
+        <marquee>शहर को बेहतर बनाने के लिए आपकी तस्वीरें और फीडबैक मायने रखते हैं! &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; एक तस्वीर, एक बदलाव! आइए, जिम्मेदार नागरिक बनें! &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;आपकी जागरूकता शहर को स्वच्छ और सुंदर बना सकती है! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  आइए, बदलाव का हिस्सा बनें!
+        </marquee>
+    </div>
+    <div class="box">
+        <h1>What problems are we looking for?</h1>
+    </div>
+
+    <!-- Main Box -->
+    <div class="main-box">
+        <!-- Image Slider Box -->
+        <div class="slider-box">
+            <img src="./Screenshot 2025-02-21 160520.png" class="active" alt="Garbage Issue">
+            <img src="./pothole.png" alt="Pothole Issue">
+            <img src="./trafficmain.png" alt="Traffic Issue">
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+    <div class="upper">
+    <div class="container">
+        <h2>Citizen Feedback System</h2>
+        
+        <label for="state">Select State:</label>
+        <select id="state" onchange="loadDistricts()">
+            <option value="">--Select State--</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="kerala">Kerala</option>  
+        </select>
+
+        <label for="district">Select District:</label>
+        <select id="district" onchange="loadCities()">
+            <option value="">--Select District--</option>
+        </select>
+
+        <label for="city">Select City:</label>
+        <select id="city" onchange="loadMunicipalBodies()">
+            <option value="">--Select City--</option>
+        </select>
+
+        <label for="municipal">Select Municipal Body:</label>
+        <select id="municipal">
+            <option value="">--Select Municipal Body--</option>
+        </select>
+
+        <label for="issue">Select Issue:</label>
+        <select id="issue" onchange="toggleOtherIssue()">
+            <option value="pothole">Pothole</option>
+            <option value="broken_signal">Broken Signal</option>
+            <option value="garbage">Garbage Collection</option>
+            <option value="other">Other</option>
+        </select>
+
+        <textarea id="otherIssueDesc" placeholder="Describe the issue..." style="display:none;"></textarea>
+
+        <label for="image">Upload Image (Max 1MB):</label>
+        <input type="file" id="image" accept="image/*" capture="environment">
+        
+        <img id="capturedImage" src="" alt="Captured Image" style="display:none;">
+
+        
+        <textarea id="imageDescription" placeholder="Describe the place and issue..." style="display:none;"></textarea>
+
+        <button onclick="submitForm()">Submit</button>
+    </div>
+</div>
+
+    
+
+<script>
+    let index = 0;
+const slides = document.querySelectorAll('.slider-box img');
+
+function showSlide(i) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[i].classList.add('active');
+}
+
+function nextSlide() {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+}
+
+function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
+    showSlide(index);
+}
+
+const districts = {
+    maharashtra: ["Ahmednagar", "Akola", "Amravati", "Aurangabad", "Beed", "Bhandara", "Buldhana", "Chandrapur", "Dhule", "Gadchiroli", "Gondia", "Hingoli", "Jalgaon", "Jalna", "Kolhapur", "Latur", "Mumbai", "Mumbai Suburban", "Nagpur", "Nanded", "Nandurbar", "Nashik", "Osmanabad", "Palghar", "Parbhani", "Pune", "Raigad", "Ratnagiri", "Sangli", "Satara", "Sindhudurg", "Solapur", "Thane", "Wardha", "Washim", "Yavatmal"],
+    kerala: ["Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam", "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta", "Thiruvananthapuram", "Thrissur", "Wayanad"]
+};
+
+const cities = {
+    Ahmednagar: ["Ahmednagar", "Shrirampur", "Kopargaon", "Sangamner", "Rahuri", "Pathardi", "Shevgaon", "Parner", "Akole", "Jamkhed", "Karjat"],
+    Akola: ["Akola", "Murtizapur", "Balapur", "Patur", "Telhara", "Akot"],
+    Amravati: ["Amravati", "Achalpur", "Chandur", "Daryapur", "Morshi", "Warud", "Dhamangaon", "Anjangaon"],
+    Aurangabad: ["Aurangabad", "Paithan", "Gangapur", "Kannad", "Vaijapur", "Sillod", "Khuldabad", "Soygaon"],
+    Beed: ["Beed", "Parli", "Ambajogai", "Kaij", "Georai", "Majalgaon", "Patoda", "Shirur Kasar", "Ashti"],
+    Bhandara: ["Bhandara", "Tumsar", "Sakoli", "Pauni", "Mohadi", "Lakhandur", "Lakhni"],
+    Buldhana: ["Buldhana", "Khamgaon", "Malkapur", "Shegaon", "Jalgaon Jamod", "Chikhli", "Mehkar", "Lonar", "Sindkhed Raja"],
+    Chandrapur: ["Chandrapur", "Ballarpur", "Rajura", "Warora", "Mul", "Brahmapuri", "Gondpipri", "Pombhurna"],
+    Dhule: ["Dhule", "Shirpur", "Sakri"],
+    Gadchiroli: ["Gadchiroli", "Aheri", "Desaiganj", "Armori", "Chamorshi"],
+    Gondia: ["Gondia", "Tirora", "Arjuni Morgaon", "Goregaon", "Sadak Arjuni", "Deori"],
+    Hingoli: ["Hingoli", "Kalamnuri", "Basmath", "Sengaon", "Aundha Nagnath"],
+    Jalgaon: ["Jalgaon", "Bhusawal", "Chopda", "Yawal", "Amalner", "Pachora", "Parola", "Raver", "Jamner", "Bodwad"],
+    Jalna: ["Jalna", "Ambad", "Bhokardan", "Partur", "Mantha"],
+    Kolhapur: ["Kolhapur", "Ichalkaranji", "Gadhinglaj", "Ajara", "Panhala", "Radhanagari", "Kagal"],
+    Latur: ["Latur", "Udgir", "Ausa", "Nilanga", "Ahmadpur", "Chakur"],
+    Mumbai: ["South Mumbai", "Suburban Mumbai"],
+    Nagpur: ["Nagpur", "Hingna", "Kalameshwar", "Kamthi", "Katol", "Mouda", "Narkhed", "Parsioni", "Ramtek", "Savner", "Umred"],
+    Nanded: ["Nanded", "Hadgaon", "Deglur", "Kandhar", "Biloli", "Mukhed", "Himayatnagar", "Loha", "Mahur"],
+    Nandurbar: ["Nandurbar", "Shahada", "Taloda", "Akkalkuwa", "Dhadgaon"],
+    Nashik: ["Nashik", "Malegaon", "Manmad", "Satana", "Sinnar", "Deolali", "Dindori", "Igatpuri", "Yeola", "Kalwan", "Chandwad"],
+    Osmanabad: ["Osmanabad", "Tuljapur", "Omerga", "Kalamb", "Paranda"],
+    Palghar: ["Palghar", "Vasai-Virar", "Dahanu", "Boisar", "Jawhar", "Talasari", "Vikramgad"],
+    Parbhani: ["Parbhani", "Gangakhed", "Jintur", "Pathri", "Selu"],
+    Pune: ["Pune City", "Pimpri-Chinchwad", "Baramati", "Talegaon", "Lonavala", "Shirur", "Daund", "Indapur", "Junnar"],
+    Raigad: ["Alibag", "Panvel", "Pen", "Uran", "Khopoli", "Mahad", "Mangaon", "Murud"],
+    Ratnagiri: ["Ratnagiri", "Chiplun", "Dapoli", "Guhagar", "Khed", "Rajapur"],
+    Sangli: ["Sangli", "Miraj", "Tasgaon", "Vita", "Jat", "Islampur", "Kavathe Mahankal"],
+    Satara: ["Satara", "Karad", "Mahabaleshwar", "Wai", "Panchgani", "Phaltan", "Koregaon"],
+    Sindhudurg: ["Malvan", "Kankavli", "Sawantwadi", "Vengurla", "Devgad"],
+    Solapur: ["Solapur", "Barshi", "Akkalkot", "Pandharpur", "Mangalvedha", "Sangole"],
+    Thane: ["Thane", "Kalyan", "Dombivli", "Ulhasnagar", "Bhiwandi", "Mira-Bhayandar", "Shahapur", "Murbad"],
+    Wardha: ["Wardha", "Hinganghat", "Deoli", "Arvi", "Pulgaon"],
+    Washim: ["Washim", "Mangrulpir", "Karanja", "Risod", "Malegaon"],
+    Yavatmal: ["Yavatmal", "Pusad", "Darwha", "Umarkhed", "Digras", "Arni", "Wani", "Ralegaon"]
+};
+
+const municipalBodies = {
+    // Ahmednagar District
+    Ahmednagar: ["Ahmednagar Municipal Corporation (MC)"],
+    Shrirampur: ["Shrirampur Municipal Council (MCl)"],
+    Kopargaon: ["Kopargaon Municipal Council (MCl)"],
+    Sangamner: ["Sangamner Municipal Council (MCl)"],
+    Rahuri: ["Rahuri Municipal Council (MCl)"],
+    Pathardi: ["Pathardi Municipal Council (MCl)"],
+    Shevgaon: ["Shevgaon Municipal Council (MCl)"],
+    Parner: ["Parner Nagar Panchayat (NP)"],
+    Akole: ["Akole Nagar Panchayat (NP)"],
+    Jamkhed: ["Jamkhed Nagar Panchayat (NP)"],
+    Karjat: ["Karjat Municipal Council (MCl)"],
+
+    // Akola District
+    Akola: ["Akola Municipal Corporation (MC)"],
+    Murtizapur: ["Murtizapur Municipal Council (MCl)"],
+    Balapur: ["Balapur Municipal Council (MCl)"],
+    Patur: ["Patur Municipal Council (MCl)"],
+    Telhara: ["Telhara Municipal Council (MCl)"],
+    Akot: ["Akot Municipal Council (MCl)"],
+
+    // Amravati District
+    Amravati: ["Amravati Municipal Corporation (MC)"],
+    Achalpur: ["Achalpur Municipal Council (MCl)"],
+    Chandur: ["Chandur Municipal Council (MCl)"],
+    Daryapur: ["Daryapur Municipal Council (MCl)"],
+    Morshi: ["Morshi Municipal Council (MCl)"],
+    Warud: ["Warud Municipal Council (MCl)"],
+    Dhamangaon: ["Dhamangaon Municipal Council (MCl)"],
+    Anjangaon: ["Anjangaon Municipal Council (MCl)"],
+
+    // Aurangabad District
+    Aurangabad: ["Aurangabad Municipal Corporation (MC)"],
+    Paithan: ["Paithan Municipal Council (MCl)"],
+    Gangapur: ["Gangapur Municipal Council (MCl)"],
+    Kannad: ["Kannad Municipal Council (MCl)"],
+    Vaijapur: ["Vaijapur Municipal Council (MCl)"],
+    Sillod: ["Sillod Municipal Council (MCl)"],
+    Khuldabad: ["Khuldabad Municipal Council (MCl)"],
+    Soygaon: ["Soygaon Nagar Panchayat (NP)"],
+
+    // Beed District
+    Beed: ["Beed Municipal Council (MCl)"],
+    Parli: ["Parli Municipal Council (MCl)"],
+    Ambajogai: ["Ambajogai Municipal Council (MCl)"],
+    Kaij: ["Kaij Nagar Panchayat (NP)"],
+    Georai: ["Georai Municipal Council (MCl)"],
+    Majalgaon: ["Majalgaon Municipal Council (MCl)"],
+    Patoda: ["Patoda Nagar Panchayat (NP)"],
+    ShirurKasar: ["Shirur Kasar Nagar Panchayat (NP)"],
+    Ashti: ["Ashti Nagar Panchayat (NP)"],
+
+    // Bhandara District
+    Bhandara: ["Bhandara Municipal Council (MCl)"],
+    Tumsar: ["Tumsar Municipal Council (MCl)"],
+    Sakoli: ["Sakoli Municipal Council (MCl)"],
+    Pauni: ["Pauni Municipal Council (MCl)"],
+    Mohadi: ["Mohadi Nagar Panchayat (NP)"],
+    Lakhandur: ["Lakhandur Nagar Panchayat (NP)"],
+    Lakhni: ["Lakhni Nagar Panchayat (NP)"],
+
+    // Buldhana District
+    Buldhana: ["Buldhana Municipal Council (MCl)"],
+    Khamgaon: ["Khamgaon Municipal Council (MCl)"],
+    Malkapur: ["Malkapur Municipal Council (MCl)"],
+    Shegaon: ["Shegaon Municipal Council (MCl)"],
+    JalgaonJamod: ["Jalgaon Jamod Municipal Council (MCl)"],
+    Chikhli: ["Chikhli Municipal Council (MCl)"],
+    Mehkar: ["Mehkar Municipal Council (MCl)"],
+    Lonar: ["Lonar Municipal Council (MCl)"],
+    SindkhedRaja: ["Sindkhed Raja Municipal Council (MCl)"],
+
+    // Chandrapur District
+    Chandrapur: ["Chandrapur Municipal Corporation (MC)"],
+    Ballarpur: ["Ballarpur Municipal Council (MCl)"],
+    Rajura: ["Rajura Municipal Council (MCl)"],
+    Warora: ["Warora Municipal Council (MCl)"],
+    Mul: ["Mul Municipal Council (MCl)"],
+    Brahmapuri: ["Brahmapuri Municipal Council (MCl)"],
+    Gondpipri: ["Gondpipri Nagar Panchayat (NP)"],
+    Pombhurna: ["Pombhurna Nagar Panchayat (NP)"],
+
+    // Dhule District
+    Dhule: ["Dhule Municipal Corporation (MC)"],
+    Shirpur: ["Shirpur Municipal Council (MCl)"],
+    Sakri: ["Sakri Nagar Panchayat (NP)"],
+
+    // Gadchiroli District
+    Gadchiroli: ["Gadchiroli Municipal Council (MCl)"],
+    Aheri: ["Aheri Nagar Panchayat (NP)"],
+    Desaiganj: ["Desaiganj Municipal Council (MCl)"],
+    Armori: ["Armori Nagar Panchayat (NP)"],
+    Chamorshi: ["Chamorshi Nagar Panchayat (NP)"],
+
+    // Gondia District
+    Gondia: ["Gondia Municipal Council (MCl)"],
+    Tirora: ["Tirora Municipal Council (MCl)"],
+    ArjuniMorgaon: ["Arjuni Morgaon Nagar Panchayat (NP)"],
+    Goregaon: ["Goregaon Nagar Panchayat (NP)"],
+    SadakArjuni: ["Sadak Arjuni Nagar Panchayat (NP)"],
+    Deori: ["Deori Nagar Panchayat (NP)"],
+
+    // Hingoli District
+    Hingoli: ["Hingoli Municipal Council (MCl)"],
+    Kalamnuri: ["Kalamnuri Municipal Council (MCl)"],
+    Basmath: ["Basmath Municipal Council (MCl)"],
+    Sengaon: ["Sengaon Nagar Panchayat (NP)"],
+    AundhaNagnath: ["Aundha Nagnath Nagar Panchayat (NP)"],
+
+    // Jalgaon District
+    Jalgaon: ["Jalgaon Municipal Corporation (MC)"],
+    Bhusawal: ["Bhusawal Municipal Council (MCl)"],
+    Chopda: ["Chopda Municipal Council (MCl)"],
+    Yawal: ["Yawal Municipal Council (MCl)"],
+    Amalner: ["Amalner Municipal Council (MCl)"],
+    Pachora: ["Pachora Municipal Council (MCl)"],
+    Parola: ["Parola Municipal Council (MCl)"],
+    Raver: ["Raver Municipal Council (MCl)"],
+    Jamner: ["Jamner Municipal Council (MCl)"],
+    Bodwad: ["Bodwad Nagar Panchayat (NP)"],
+
+    // Jalna District
+    Jalna: ["Jalna Municipal Corporation (MC)"],
+    Ambad: ["Ambad Municipal Council (MCl)"],
+    Bhokardan: ["Bhokardan Municipal Council (MCl)"],
+    Partur: ["Partur Municipal Council (MCl)"],
+    Mantha: ["Mantha Nagar Panchayat (NP)"],
+
+    // Kolhapur District
+    Kolhapur: ["Kolhapur Municipal Corporation (MC)"],
+    Ichalkaranji: ["Ichalkaranji Municipal Corporation (MC)"],
+    Gadhinglaj: ["Gadhinglaj Municipal Council (MCl)"],
+    Ajara: ["Ajara Nagar Panchayat (NP)"],
+    Panhala: ["Panhala Nagar Panchayat (NP)"],
+    Radhanagari: ["Radhanagari Nagar Panchayat (NP)"],
+    Kagal: ["Kagal Municipal Council (MCl)"],
+
+    // Latur District
+    Latur: ["Latur Municipal Corporation (MC)"],
+    Udgir: ["Udgir Municipal Council (MCl)"],
+    Ausa: ["Ausa Municipal Council (MCl)"],
+    Nilanga: ["Nilanga Municipal Council (MCl)"],
+    Ahmadpur: ["Ahmadpur Municipal Council (MCl)"],
+    Chakur: ["Chakur Nagar Panchayat (NP)"],
+
+    // Mumbai District
+    SouthMumbai: ["Brihanmumbai Municipal Corporation (MC)"],
+    SuburbanMumbai: ["Brihanmumbai Municipal Corporation (MC)"],
+
+    // Nagpur District
+    Nagpur: ["Nagpur Municipal Corporation (MC)"],
+    Hingna: ["Hingna Nagar Panchayat (NP)"],
+    Kalameshwar: ["Kalameshwar Nagar Panchayat (NP)"],
+    Kamthi: ["Kamptee Municipal Council (MCl)"],
+    Katol: ["Katol Municipal Council (MCl)"],
+    Mouda: ["Mouda Nagar Panchayat (NP)"],
+    Narkhed: ["Narkhed Nagar Panchayat (NP)"],
+    Parsioni: ["Parseoni Nagar Panchayat (NP)"],
+    Ramtek: ["Ramtek Municipal Council (MCl)"],
+    Savner: ["Savner Municipal Council (MCl)"],
+    Umred: ["Umred Municipal Council (MCl)"],
+
+    // Nanded District
+    Nanded: ["Nanded-Waghala Municipal Corporation (MC)"],
+    Hadgaon: ["Hadgaon Nagar Panchayat (NP)"],
+    Deglur: ["Deglur Municipal Council (MCl)"],
+    Kandhar: ["Kandhar Municipal Council (MCl)"],
+    Biloli: ["Biloli Nagar Panchayat (NP)"],
+    Mukhed: ["Mukhed Municipal Council (MCl)"],
+    Himayatnagar: ["Himayatnagar Nagar Panchayat (NP)"],
+    Loha: ["Loha Municipal Council (MCl)"],
+    Mahur: ["Mahur Nagar Panchayat (NP)"],
+
+    // Nandurbar District
+    Nandurbar: ["Nandurbar Municipal Council (MCl)"],
+    Shahada: ["Shahada Municipal Council (MCl)"],
+    Taloda: ["Taloda Municipal Council (MCl)"],
+    Akkalkuwa: ["Akkalkuwa Nagar Panchayat (NP)"],
+    Dhadgaon: ["Dhadgaon Nagar Panchayat (NP)"],
+
+    // Nashik District
+    Nashik: ["Nashik Municipal Corporation (MC)"],
+    Malegaon: ["Malegaon Municipal Corporation (MC)"],
+    Manmad: ["Manmad Municipal Council (MCl)"],
+    Satana: ["Satana Municipal Council (MCl)"],
+    Sinnar: ["Sinnar Municipal Council (MCl)"],
+    Deolali: ["Deolali Cantonment Board"],
+    Dindori: ["Dindori Nagar Panchayat (NP)"],
+    Igatpuri: ["Igatpuri Municipal Council (MCl)"],
+    Yeola: ["Yeola Municipal Council (MCl)"],
+    Kalwan: ["Kalwan Nagar Panchayat (NP)"],
+    Chandwad: ["Chandwad Nagar Panchayat (NP)"],
+
+    // Osmanabad District
+    Osmanabad: ["Osmanabad Municipal Council (MCl)"],
+    Tuljapur: ["Tuljapur Municipal Council (MCl)"],
+    Omerga: ["Omerga Municipal Council (MCl)"],
+    Kalamb: ["Kalamb Nagar Panchayat (NP)"],
+    Paranda: ["Paranda Nagar Panchayat (NP)"],
+
+    // Palghar District
+    Palghar: ["Palghar Municipal Council (MCl)"],
+    VasaiVirar: ["Vasai-Virar City Municipal Corporation (MC)"],
+    Dahanu: ["Dahanu Municipal Council (MCl)"],
+    Boisar: ["Boisar Nagar Panchayat (NP)"],
+    Jawhar: ["Jawhar Municipal Council (MCl)"],
+    Talasari: ["Talasari Nagar Panchayat (NP)"],
+    Vikramgad: ["Vikramgad Nagar Panchayat (NP)"],
+
+    // Parbhani District
+    Parbhani: ["Parbhani Municipal Corporation (MC)"],
+    Gangakhed: ["Gangakhed Municipal Council (MCl)"],
+    Jintur: ["Jintur Municipal Council (MCl)"],
+    Pathri: ["Pathri Municipal Council (MCl)"],
+    Selu: ["Selu Municipal Council (MCl)"],
+
+    // Pune District
+    PuneCity: ["Pune Municipal Corporation (MC)"],
+    PimpriChinchwad: ["Pimpri-Chinchwad Municipal Corporation (MC)"],
+    Baramati: ["Baramati Municipal Council (MCl)"],
+    Talegaon: ["Talegaon Dabhade Municipal Council (MCl)"],
+    Lonavala: ["Lonavala Municipal Council (MCl)"],
+    Shirur: ["Shirur Municipal Council (MCl)"],
+
+    // Raigad District
+    Alibag: ["Alibag Municipal Council (MCl)"],
+    Panvel: ["Panvel Municipal Corporation (MC)"],
+    Pen: ["Pen Municipal Council (MCl)"],
+    Uran: ["Uran Municipal Council (MCl)"],
+    Khopoli: ["Khopoli Municipal Council (MCl)"],
+    Mahad: ["Mahad Municipal Council (MCl)"],
+    Mangaon: ["Mangaon Nagar Panchayat (NP)"],
+    Murud: ["Murud Nagar Panchayat (NP)"],
+
+    // Ratnagiri District
+    Ratnagiri: ["Ratnagiri Municipal Council (MCl)"],
+    Chiplun: ["Chiplun Municipal Council (MCl)"],
+    Dapoli: ["Dapoli Nagar Panchayat (NP)"],
+    Guhagar: ["Guhagar Nagar Panchayat (NP)"],
+    Khed: ["Khed Nagar Panchayat (NP)"],
+    Rajapur: ["Rajapur Municipal Council (MCl)"],
+
+    // Sangli District
+    Sangli: ["Sangli-Miraj & Kupwad Municipal Corporation (MC)"],
+    Miraj: ["Sangli-Miraj & Kupwad Municipal Corporation (MC)"],
+    Tasgaon: ["Tasgaon Municipal Council (MCl)"],
+    Vita: ["Vita Municipal Council (MCl)"],
+    Jat: ["Jat Nagar Panchayat (NP)"],
+    Islampur: ["Islampur Municipal Council (MCl)"],
+    KavatheMahankal: ["Kavathe Mahankal Nagar Panchayat (NP)"],
+
+    // Satara District
+    Satara: ["Satara Municipal Council (MCl)"],
+    Karad: ["Karad Municipal Council (MCl)"],
+    Mahabaleshwar: ["Mahabaleshwar Municipal Council (MCl)"],
+    Wai: ["Wai Municipal Council (MCl)"],
+    Panchgani: ["Panchgani Municipal Council (MCl)"],
+    Phaltan: ["Phaltan Municipal Council (MCl)"],
+    Koregaon: ["Koregaon Nagar Panchayat (NP)"],
+
+    // Sindhudurg District
+    Malvan: ["Malvan Municipal Council (MCl)"],
+    Kankavli: ["Kankavli Nagar Panchayat (NP)"],
+    Sawantwadi: ["Sawantwadi Municipal Council (MCl)"],
+    Vengurla: ["Vengurla Municipal Council (MCl)"],
+    Devgad: ["Devgad Nagar Panchayat (NP)"],
+
+    // Solapur District
+    Solapur: ["Solapur Municipal Corporation (MC)"],
+    Barshi: ["Barshi Municipal Council (MCl)"],
+    Akkalkot: ["Akkalkot Municipal Council (MCl)"],
+    Pandharpur: ["Pandharpur Municipal Council (MCl)"],
+    Mangalvedha: ["Mangalvedha Municipal Council (MCl)"],
+    Sangole: ["Sangole Municipal Council (MCl)"],
+
+    // Thane District
+    Thane: ["Thane Municipal Corporation (MC)"],
+    Kalyan: ["Kalyan-Dombivli Municipal Corporation (MC)"],
+    Dombivli: ["Kalyan-Dombivli Municipal Corporation (MC)"],
+    Ulhasnagar: ["Ulhasnagar Municipal Corporation (MC)"],
+    Bhiwandi: ["Bhiwandi-Nizampur Municipal Corporation (MC)"],
+    MiraBhayandar: ["Mira-Bhayandar Municipal Corporation (MC)"],
+    Shahapur: ["Shahapur Nagar Panchayat (NP)"],
+    Murbad: ["Murbad Nagar Panchayat (NP)"],
+
+    // Wardha District
+    Wardha: ["Wardha Municipal Council (MCl)"],
+    Hinganghat: ["Hinganghat Municipal Council (MCl)"],
+    Deoli: ["Deoli Nagar Panchayat (NP)"],
+    Arvi: ["Arvi Municipal Council (MCl)"],
+    Pulgaon: ["Pulgaon Municipal Council (MCl)"],
+
+    // Washim District
+    Washim: ["Washim Municipal Council (MCl)"],
+    Mangrulpir: ["Mangrulpir Nagar Panchayat (NP)"],
+    Karanja: ["Karanja Municipal Council (MCl)"],
+    Risod: ["Risod Municipal Council (MCl)"],
+    Malegaon: ["Malegaon Nagar Panchayat (NP)"],
+
+    // Yavatmal District
+    Yavatmal: ["Yavatmal Municipal Council (MCl)"],
+    Pusad: ["Pusad Municipal Council (MCl)"],
+    Darwha: ["Darwha Nagar Panchayat (NP)"],
+    Umarkhed: ["Umarkhed Municipal Council (MCl)"],
+    Digras: ["Digras Municipal Council (MCl)"],
+    Arni: ["Arni Nagar Panchayat (NP)"],
+    Wani: ["Wani Municipal Council (MCl)"],
+    Ralegaon: ["Ralegaon Nagar Panchayat (NP)"]
+};
+function loadDistricts() {
+    let state = document.getElementById("state").value;
+    let districtDropdown = document.getElementById("district");
+    districtDropdown.innerHTML = '<option value="">--Select District--</option>';
+    
+    if (state && districts[state]) {
+        districts[state].forEach(district => {
+            districtDropdown.innerHTML += <option value="${district}">${district}</option>;
+        });
+    }
+}
+
+        function loadCities() {
+            let district = document.getElementById("district").value;
+            let cityDropdown = document.getElementById("city");
+            cityDropdown.innerHTML = '<option value="">--Select City--</option>';
+            if (district && cities[district]) {
+                cities[district].forEach(city => {
+                    cityDropdown.innerHTML += <option value="${city}">${city}</option>;
+                });
+            }
+            // Clear municipal body dropdown when district changes
+            document.getElementById("municipal").innerHTML = '<option value="">--Select Municipal Body--</option>';
+        }
+
+        function loadMunicipalBodies() {
+            let city = document.getElementById("city").value;
+            let municipalDropdown = document.getElementById("municipal");
+            municipalDropdown.innerHTML = '<option value="">--Select Municipal Body--</option>';
+            if (city && municipalBodies[city]) {
+                municipalBodies[city].forEach(municipal => {
+                    municipalDropdown.innerHTML += <option value="${municipal}">${municipal}</option>;
+                });        
+    }
+}
+
+function toggleOtherIssue() {
+    const issueSelect = document.getElementById("issue");
+    const otherIssueDesc = document.getElementById("otherIssueDesc");
+    otherIssueDesc.style.display = issueSelect.value === "other" ? "block" : "none";
+}
+
+function submitForm() {
+    const feedbackData = {
+        state: document.getElementById("state").value,
+        district: document.getElementById("district").value,
+        city: document.getElementById("city").value,
+        municipal: document.getElementById("municipal").value,
+        issue: document.getElementById("issue").value,
+        otherIssue: document.getElementById("otherIssueDesc") ? document.getElementById("otherIssueDesc").value : "",
+        image: document.getElementById("capturedImage").src,
+        description: document.getElementById("imageDescription").value // Capture the description
+    };
+
+    // Save to localStorage
+    let storedData = JSON.parse(localStorage.getItem("feedbacks")) || [];
+    storedData.push(feedbackData);
+    
+    localStorage.setItem("feedbacks", JSON.stringify(storedData));
+
+    
+    
+    alert("Feedback submitted successfully!");
+}
+/*function submitForm() {
+    const feedbackData = {
+        state: document.getElementById("state").value,
+        district: document.getElementById("district").value,
+        city: document.getElementById("city").value,
+        municipal: document.getElementById("municipal").value,
+        issue: document.getElementById("issue").value,
+        otherIssue: document.getElementById("otherIssueDesc") ? document.getElementById("otherIssueDesc").value : "",
+        image: document.getElementById("capturedImage").src,
+        description: document.getElementById("imageDescription").value // Capture the description
+    };
+
+    // Store only the most recent feedback
+    localStorage.setItem("feedbacks", JSON.stringify([feedbackData]));
+
+    alert("Feedback submitted successfully!");
+}*/
+
+
+document.getElementById("image").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById("capturedImage");
+            img.src = e.target.result;
+            img.style.display = "block";
+            document.getElementById("imageDescription").style.display = "block";
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+
+
+
+    
+</script>
+</body>
+</html>
